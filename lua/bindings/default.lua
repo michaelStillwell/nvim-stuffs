@@ -4,30 +4,44 @@
 
 local keymap = vim.api.nvim_set_keymap
 local opts = { noremap = true }
+local vim_path = "~/AppData/Local/nvim/"
 
+-- Functions
+function map(mode, shortcut, command, options)
+  local opts = options
+  if (options == nil) then opts = {} end
+  vim.api.nvim_set_keymap(mode, shortcut, command, opts)
+end
+
+function nmap(mode, shortcut, command)
+  local opts = { noremap = true, silent = true }
+  map(mode, shortcut, command, opts)
+end
 
 -- Esc
-keymap('i', '<leader><leader>', '<Esc>', {})
-keymap('i', '<leader><leader>', '<Esc>', {})
-keymap('v', '<leader><leader>', '<Esc>', {})
-keymap('n', '<leader><leader>', '<Esc>', {})
+map('i', '<leader><leader>', '<Esc>', {})
+map('v', '<leader><leader>', '<Esc>', {})
+map('n', '<leader><leader>', '<Esc>', {})
 
 -- Save file with Ctrl-S
-keymap('n', '<c-s>', ':w<CR>', {})
-keymap('i', '<c-s>', '<Esc>:w<CR>', {})
+map('n', '<c-s>', ':w<CR>', {})
+map('i', '<c-s>', '<Esc>:w<CR>', {})
+
+-- Select all
+map('n', '<c-a>', 'ggVG', {})
 
 -- Window Movement
-keymap('n', '<c-j>', '<c-w>j', opts)
-keymap('n', '<c-h>', '<c-w>h', opts)
-keymap('n', '<c-k>', '<c-w>k', opts)
-keymap('n', '<c-l>', '<c-w>l', opts)
+map('n', '<c-j>', '<c-w>j', opts)
+map('n', '<c-h>', '<c-w>h', opts)
+map('n', '<c-k>', '<c-w>k', opts)
+map('n', '<c-l>', '<c-w>l', opts)
 
 -- Close window
-keymap('n', '<leader>q', ':q<CR>', opts)
+nmap('n', '<leader>q', ':q<CR>', opts)
 
 -- Open Vex
-keymap('n', '<leader>e', ':Vex<CR>', {})
+nmap('n', '<leader>e', ':Lex<CR>', {})
 
 -- Open settings.lua
-keymap('n', '<leader>pv', ':e $HOME/.config/nvim/general/settings.lua<CR>', {})
+nmap('n', '<leader>pv', ':e ' .. vim_path .. 'lua/settings.lua<CR>', {})
 
