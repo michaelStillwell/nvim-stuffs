@@ -1,4 +1,45 @@
-require('packer').startup(function()
+-- Auto install packer
+local fn = vim.fn
+local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+  PACKER_BOOTSTRAP = fn.system {
+    'git',
+    'clone',
+    '--depth',
+    '1',
+    'https://github.com/wbthomason/packer.nvim',
+    install_path
+  }
+  print '[Installing] packer.nvim'
+  vim.cmd [[packadd packer.nvim]]
+end
+
+
+-- Autocommand to reload when plugins/default.lua is saved
+vim.cmd [[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+  augroup end
+]]
+
+
+-- Protected call to avoid seeing error on first use
+local status_ok, packer = pcall(require, 'packer')
+if not status_ok then
+  return
+end
+
+packer.init {
+  display = {
+    open_fn = function()
+      return require('packer.util').float { border = 'rounded' }
+    end
+  }
+}
+
+
+packer.startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'morhetz/gruvbox'
 
@@ -25,41 +66,21 @@ require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
   use 'williamboman/nvim-lsp-installer'
 
+  -- Neovim Tree
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons'
+    },
+    config = function() require'nvim-tree'.setup {} end
+  }
+
 end)
 
 -- Coloscheme
-vim.g.colors_name = 'gruvbox'
+vim.cmd [[ colorscheme gruvbox ]]
 
--- Configs
-local ts_configs = require'nvim-treesitter.configs'
-ts_configs.setup {
-  ensure_installed = 'maintained',
-  hightlight = {
-    enable = true
-  },
-  index = {
-    enable = true
-  }
-}
-
---local lsp_installer = require('nvim-lsp-installer')
---lsp_installer.on_server_ready(function(server)
---  local opts = {}
---  server:setup(opts)
---end)
-
--- Auto install lsps
-local lsp_installer = require 'nvim-lsp-installer'
-
-local server = {
-  'sumneko_lua'
-}
-
-for _, name in pairs(server) do
-  local server_is_found, server = lsp_installer.get_server(name)
-  if server_is_found and not server:is_installed() then
-    print("[Installing] " .. name)
-    server:install()
-  end
-end
+-- this is supposed to work, but it only changes
+-- the variable value and not the acutal colorschme
+-- vim.g.colors_name = 'gruvbox'
 
