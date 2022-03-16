@@ -15,6 +15,7 @@ vim.o.relativenumber = true
 vim.o.scrolloff = 10
 
 -- Window - vim.wo
+vim.wo.colorcolumn = '100'
 
 -- Buffer - vim.bo
 vim.opt.expandtab = true

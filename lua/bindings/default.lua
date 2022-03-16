@@ -38,13 +38,13 @@ nmap('n', '<c-k>', '<c-w>k')
 nmap('n', '<c-l>', '<c-w>l')
 
 -- Close window
-nmap('n', '<leader>q', ':q<CR>')
+nmap('n', '<leader>q<leader>', ':q<CR>')
 
 -- Close all windows
 nmap('n', '<leader>qq', ':qa<CR>')
 
 -- Open File Explorer
-nmap('n', '<leader>', ':NvimTreeToggle<CR>')
+nmap('n', '<leader>e', ':NvimTreeToggle<CR>')
 
 -- Open settings.lua
 nmap('n', '<leader>pv', ':e ' .. vim_path .. 'lua/settings.lua<CR>')

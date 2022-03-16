@@ -62,9 +62,17 @@ packer.startup(function(use)
     end
   }
 
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
+
   use 'nvim-treesitter/nvim-treesitter'
-  use 'neovim/nvim-lspconfig'
-  use 'williamboman/nvim-lsp-installer'
+  use 'neovim/nvim-lspconfig' -- native LSP support
+  use 'williamboman/nvim-lsp-installer' -- LSP installer
+  use 'hrsh7th/nvim-cmp' -- autocompletion framework
+  use 'hrsh7th/cmp-nvim-lsp' -- LSP autocompletion provider
+  use 'mfussenegger/nvim-dap' -- Debug Adapter Protocol
 
   -- Neovim Tree
   use {
