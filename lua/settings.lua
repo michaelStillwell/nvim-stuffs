@@ -3,8 +3,8 @@
 
 
 -- Leader
-vim.g.mapleader = ';'
-vim.g.maplocalleader = ';'
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 -- Configurations
 
@@ -55,3 +55,4 @@ vim.opt.signcolumn = "yes"                      -- always show the sign column, 
 vim.opt.wrap = false                            -- display lines as one long line
 vim.opt.sidescrolloff = 8
 vim.opt.guifont = "monospace:h17"               -- the font used in graphical neovim applications
+
