@@ -8,6 +8,22 @@ vim.g.maplocalleader = ' '
 
 -- Configurations
 
+-- Lsp Stuff (probably)
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = true,
+  float = {
+    border = 'single',
+    format = function(diagnostic)
+      return string.format(
+        '%s (%s) [%s]',
+        diagnostic.message,
+        diagnostic.source,
+        diagnostic.code or diagnostic.user_data.lsp.code)
+    end
+  }
+})
+
 -- Global - vim.o
 vim.o.timeoutlen = 500
 vim.o.number = true

@@ -11,11 +11,11 @@ Fns.Nmap('n', 'K', ':lua vim.lsp.buf.hover()<CR>')
 Fns.Nmap('n', '<c-k>', ':lua vim.lsp.buf.signature_help()<CR>')
 Fns.Nmap('n', '<leader>af', ':lua vim.lsp.buf.code_action()<CR>')
 Fns.Nmap('n', '<leader>rn', ':lua vim.lsp.buf.rename()<CR>')
+Fns.Nmap('n', 'g<CR>', ':lua vim.diagnostic.open_float()<CR>')
 
 Fns = {
   OnAttach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-    print ("[hello there]")
   end
 }
 
