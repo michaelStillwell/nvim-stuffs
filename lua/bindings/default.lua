@@ -52,12 +52,17 @@ Fns.Nmap('n', '<leader>e', ':NvimTreeToggle<CR>')
 -- Open settings.lua
 Fns.Nmap('n', '<leader>pv', ':e ' .. vim_path .. 'lua/settings.lua<CR>')
 
+-- Clear search
+Fns.Nmap('n', '<leader>sc', ':noh<CR>')
+Fns.Nmap('i', '<leader>sc', ':noh<CR>')
+Fns.Nmap('v', '<leader>sc', ':noh<CR>')
+
 
 -- From LunarVim/Neovim-from-scratch
 Fns.Nmap('n', '<C-Up>', ':resize +2<CR>')
-Fns.Nmap('n', '<C-Up>', ':resize +2<CR>')
-Fns.Nmap('n', '<C-Left>', ':vertical resize -2<CR>')
-Fns.Nmap('n', '<C-Right>', ':vertical resize +2<CR>')
+Fns.Nmap('n', '<C-Down>', ':resize -2<CR>')
+Fns.Nmap('n', '<C-Left>', ':vertical resize +2<CR>')
+Fns.Nmap('n', '<C-Right>', ':vertical resize -2<CR>')
 
 Fns.Nmap('n', '<S-l>', ':bnext<CR>')
 Fns.Nmap('n', '<S-h>', ':bprevious<CR>')
@@ -68,14 +73,50 @@ Fns.Nmap('v', '>', '>gv')
 Fns.Nmap('v', '<A-j>', ':m .+1<CR>==')
 Fns.Nmap('v', '<A-k>', ':m .-2<CR>==')
 
-Fns.Nmap('x', 'J', ":move '>+1<CR>gv-gv")
-Fns.Nmap('x', 'K', ":move '<-2<CR>gv-gv")
-Fns.Nmap('x', '<A-j>', ":move '>+1<CR>gv-gv")
-Fns.Nmap('x', '<A-k>', ":move '<-2<CR>gv-gv")
+-- too wonky
+--Fns.Nmap('x', 'J', ":move '>+1<CR>gv-gv")
+--Fns.Nmap('x', 'K', ":move '<-2<CR>gv-gv")
+--Fns.Nmap('x', '<A-j>', ":move '>+1<CR>gv-gv")
+--Fns.Nmap('x', '<A-k>', ":move '<-2<CR>gv-gv")
 
 Fns.Nmap('t', '<C-h>', '<C-\\><C-N><C-w>h')
 Fns.Nmap('t', '<C-j>', '<C-\\><C-N><C-w>j')
 Fns.Nmap('t', '<C-k>', '<C-\\><C-N><C-w>k')
 Fns.Nmap('t', '<C-l>', '<C-\\><C-N><C-w>l')
+
+Fns.Nmap('n', '<leader>ff', ':lua require("telescope.builtin").find_files()<CR>')
+Fns.Nmap('n', '<leader>fg', ':lua require("telescope.builtin").live_grep()<CR>')
+
+
+Fns.Nmap('n', '<leader>gr', ':lua require("telescope.builtin").lsp_references()<CR>')
+Fns.Nmap('n', '<leader>gs', ':lua require("telescope.builtin").git_status()<CR>')
+
+
+-- buffer tabs
+Fns.Nmap('n', '[b', ':BufferLineMoveNext<CR>')
+Fns.Nmap('n', 'b]', ':BufferLineMovePrev<CR>')
+Fns.Nmap('n', '<leader>l', ':BufferLineCycleNext<CR>')
+Fns.Nmap('n', '<leader>h', ':BufferLineCyclePrev<CR>')
+
+
+-- diagnostics (warnings, errors, etc)
+Fns.Nmap('n', '<leader>sd', ':lua require("telescope.builtin").diagnostics()<CR>')
+
+
+local actions = require('telescope.actions')
+require'telescope'.setup {
+  defaults = {
+    mappings = {
+      i = {
+        -- movement
+        ['<C-j>'] = actions.move_selection_next,
+        ['<C-k>'] = actions.move_selection_previous,
+
+        ['<C-u>'] = false,
+        ['<esc>'] = actions.close
+      }
+    }
+  }
+}
 
 return Fns

@@ -1,12 +1,11 @@
 require 'bindings/default'
 
 local telescope = require('telescope')
-local nmap = Fns.Nmap
 
-
+for i, v in ipairs(Fns) do print(i, v) end
 
 -- Configs
-nmap('n', '<leader>ff', ':lua require("telescope.builtin").find_files()<CR>')
+Fns.Nmap('n', '<leader>ff', ':lua require("telescope.builtin").find_files()<CR>')
 nmap('n', '<leader>fg', ':lua require("telescope.builtin").live_grep()<CR>')
 
 

@@ -10,10 +10,8 @@ ts_configs.setup {
   }
 }
 
---[[
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.opt.foldmethod = 'expr'
---]]
 
 --[[
 -- Example function to test bindings

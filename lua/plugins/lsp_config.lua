@@ -24,6 +24,7 @@ local server_list = {
   -- 'omnisharp',
   'elixirls',
   'clangd',
+  'rust_analyzer'
 }
 
 for _, name in pairs(server_list) do
@@ -36,6 +37,10 @@ end
 
 -- Elixir config
 --require'lspconfig'.
+
+
+-- Rust
+require'lspconfig'.rust_analyzer.setup {}
 
 
 -- Cpp config

@@ -29,7 +29,7 @@ packer.init {
   }
 }
 
-
+-- Packages
 packer.startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'morhetz/gruvbox'
@@ -84,6 +84,23 @@ packer.startup(function(use)
   -- Snippets
   use 'hrsh7th/cmp-vsnip'
   use 'hrsh7th/vim-vsnip'
+
+  -- todo viewer
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require('todo-comments').setup {
+        -- configuration goes here
+      }
+    end
+  }
+
+  -- tabs
+  use {
+    'akinsho/bufferline.nvim',
+    requires = 'kyazdani42/nvim-web-devicons'
+  }
 
   -- Markdown Stuff
 
